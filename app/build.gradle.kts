@@ -2,16 +2,18 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.google.services)
     id("com.google.devtools.ksp")
     kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
-    namespace = "com.example.starterproject"
+    namespace = "com.example.makanyuk"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.starterproject"
+        applicationId = "com.example.makanyuk"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -58,6 +60,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.material)
 
     implementation (libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
