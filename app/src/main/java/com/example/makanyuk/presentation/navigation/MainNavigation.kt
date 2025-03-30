@@ -31,6 +31,11 @@ import com.example.makanyuk.ui.theme.StarterProjectTheme
 import androidx.compose.material.FabPosition
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.toRoute
+import com.example.makanyuk.presentation.add.AddScreen
+import com.example.makanyuk.presentation.home.DetailScreen
+import com.example.makanyuk.presentation.notif.NotifScreen
+import com.example.makanyuk.presentation.profile.ProfileScreen
 
 @Composable
 fun MainNavigation(
@@ -55,10 +60,10 @@ fun MainNavigation(
                     onItemSelected = {
                         selectedItem = it
                         when (it) {
-                            0 -> navigateToTab(navController, Route.HomeScreen.route)
-                            1 -> navigateToTab(navController, Route.SavedScreen.route)
-                            2 -> navigateToTab(navController, Route.NotifScreen.route)
-                            3 -> navigateToTab(navController, Route.ProfileScreen.route)
+                            0 -> navigateToTab(navController, HomeRoute)
+                            1 -> navigateToTab(navController, SavedRoute)
+                            2 -> navigateToTab(navController, NotifRoute)
+                            3 -> navigateToTab(navController, ProfileRoute)
                         }
                     },
                 )
@@ -71,7 +76,7 @@ fun MainNavigation(
             FloatingActionButton(
                 shape = CircleShape,
                 onClick = {
-                        Route.AddScreen.route.let {
+                        AddRoute.let {
                             navController.navigate(it){
                                 popUpTo(it) {
                                     saveState = true
@@ -92,15 +97,37 @@ fun MainNavigation(
         val bottomPadding = it.calculateBottomPadding()
         NavHost(
             navController = navController,
-            startDestination = Route.HomeScreen.route,
+            startDestination = HomeRoute,
             modifier = modifier.padding(bottom = bottomPadding)
         ) {
-            composable(Route.HomeScreen.route) {
-                HomeScreen()
+            composable<HomeRoute> {
+                HomeScreen(
+                    navigateDetail = {
+                        navController.navigate(DetailRoute(
+                            id = it
+                        ))
+                    }
+                )
             }
-            composable(Route.SavedScreen.route){
+            composable<SavedRoute>{
                 SavedScren()
             }
+            composable<DetailRoute>{
+                val id = it.toRoute<DetailRoute>()
+                DetailScreen(
+                    id = id.id
+                )
+            }
+            composable<NotifRoute>{
+                NotifScreen()
+            }
+            composable<ProfileRoute>{
+                ProfileScreen()
+            }
+            composable<AddRoute>{
+                AddScreen()
+            }
+
             
         }
     }
@@ -108,7 +135,7 @@ fun MainNavigation(
 
 private fun navigateToTab(
     navController: NavController,
-    route: String
+    route: AppRoute
 ) {
     navController.navigate(route) {
         navController.graph.startDestinationRoute?.let { homescreen ->

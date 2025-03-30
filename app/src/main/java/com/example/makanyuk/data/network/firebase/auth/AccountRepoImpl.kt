@@ -1,14 +1,10 @@
 package com.example.makanyuk.data.network.firebase.auth
 
-import com.example.makanyuk.model.auth.Account
-import com.example.makanyuk.model.auth.repo.AccountRepo
+import com.example.makanyuk.domain.auth.Account
+import com.example.makanyuk.domain.auth.repo.AccountRepo
 import com.example.makanyuk.util.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.toObject
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 

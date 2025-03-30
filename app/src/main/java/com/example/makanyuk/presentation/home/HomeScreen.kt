@@ -1,5 +1,6 @@
 package com.example.makanyuk.presentation.home
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -55,7 +56,8 @@ import com.example.makanyuk.util.Resource
 fun HomeScreen(
     modifier: Modifier = Modifier,
     authViewModel: AuthViewModel = hiltViewModel(),
-    homeViewModel: HomeViewModel = hiltViewModel()
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    navigateDetail : (Int) -> Unit
 ) {
     val account = authViewModel.accountState.collectAsState()
     val recipes by homeViewModel.recipes.collectAsState()
@@ -82,7 +84,9 @@ fun HomeScreen(
 
     ) {
        Row(
-           modifier = modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 12.dp),
+           modifier = modifier
+               .fillMaxWidth()
+               .padding(horizontal = 24.dp, vertical = 12.dp),
            verticalAlignment = Alignment.CenterVertically,
        ){
            Column{
@@ -98,7 +102,9 @@ fun HomeScreen(
        }
         Spacer(modifier.height(20.dp))
        Row (
-           modifier = modifier.fillMaxWidth().padding(horizontal = 24.dp),
+           modifier = modifier
+               .fillMaxWidth()
+               .padding(horizontal = 24.dp),
            verticalAlignment = Alignment.CenterVertically,
            horizontalArrangement = Arrangement.SpaceBetween
        ){
@@ -128,7 +134,9 @@ fun HomeScreen(
        }
         Spacer(modifier.height(15.dp))
         LazyRow (
-            modifier = modifier.fillMaxWidth().padding(start = 24.dp)
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(start = 24.dp)
         ){
             items(category.size){
                 CategoryButton(
@@ -153,11 +161,13 @@ fun HomeScreen(
                     }
                 }
                 is Resource.Success -> {
-                    items(recipes.data?.size ?: 0){
+                    items(recipes.data?.size ?: 0){ recipe ->
                         RecipeCard(
-                            recipe = recipes.data?.get(it)!!,
+                            recipe = recipes.data?.get(recipe)!!,
                             onClick = {
-
+                                val id = recipes.data!![recipe].id
+                                Log.d("DetailScreen", "Navigasi ke detail dengan ID: $id")
+                                navigateDetail(id)
                             }
                         )
                     }
@@ -178,10 +188,3 @@ fun HomeScreen(
 
 
 
-@Preview(showBackground = true)
-@Composable
-private fun cobain() {
-    StarterProjectTheme {
-        HomeScreen()
-    }
-}

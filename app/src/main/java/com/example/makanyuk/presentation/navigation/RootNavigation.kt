@@ -1,5 +1,4 @@
 package com.example.makanyuk.presentation.navigation
-
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -11,24 +10,24 @@ import com.example.makanyuk.presentation.auth.RegisterScreen
 @Composable
 fun RootNavigation(
     modifier: Modifier = Modifier,
-    startDestiation : String
+    startDestiation : AppRoute
 ) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = startDestiation
     ) {
-        composable(Route.LoginScreen.route){
+        composable<LoginRoute>{
             LoginScreen(
                 navController = navController
             )
         }
-        composable(Route.RegisterScreen.route){
+        composable<RegisterRoute>{
             RegisterScreen(
                 navController = navController
             )
         }
-        composable(Route.MainNavigation.route){
+        composable<MainRoute>{
             MainNavigation()
         }
     }

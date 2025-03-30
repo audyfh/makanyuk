@@ -1,9 +1,8 @@
 package com.example.makanyuk.data.network.retrofit
 
-import com.example.makanyuk.model.recipe.Recipe
-import com.example.makanyuk.model.recipe.RecipeResponse
-import com.example.makanyuk.model.recipe.mealplan.MealPlan
-import com.example.makanyuk.model.recipe.repo.RecipeRepo
+import com.example.makanyuk.domain.recipe.Recipe
+import com.example.makanyuk.domain.recipe.mealplan.MealPlan
+import com.example.makanyuk.domain.recipe.repo.RecipeRepo
 import com.example.makanyuk.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -35,7 +34,7 @@ class RecipeRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getRecipeById(id: String): Flow<Resource<Recipe>> {
+    override suspend fun getRecipeById(id: Int): Flow<Resource<Recipe>> {
         return flow {
             try {
                 emit(Resource.Loading())
@@ -58,4 +57,6 @@ class RecipeRepoImpl @Inject constructor(
             }
         }
     }
+
+
 }

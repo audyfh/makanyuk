@@ -1,24 +1,23 @@
 package com.example.makanyuk.presentation.auth
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.makanyuk.model.auth.Account
-import com.example.makanyuk.model.auth.repo.AccountRepo
-import com.example.makanyuk.model.auth.repo.AuthRepo
+import com.example.makanyuk.domain.auth.Account
+import com.example.makanyuk.domain.auth.repo.AccountRepo
+import com.example.makanyuk.domain.auth.repo.AuthRepo
+import com.example.makanyuk.presentation.navigation.AppRoute
+import com.example.makanyuk.presentation.navigation.LoginRoute
+import com.example.makanyuk.presentation.navigation.MainRoute
 import com.example.makanyuk.presentation.navigation.Route
 import com.example.makanyuk.util.Resource
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
@@ -35,7 +34,7 @@ class AuthViewModel @Inject constructor(
     private var _accountState = MutableStateFlow<Resource<Account>>(Resource.Loading())
     val accountState: StateFlow<Resource<Account>> = _accountState.asStateFlow()
 
-    var startDestination = Route.LoginScreen.route
+    var startDestination : AppRoute = LoginRoute
 
     init {
         getCurrentUser()
@@ -84,7 +83,7 @@ class AuthViewModel @Inject constructor(
             authRepo.getCurrentUser().collect { result ->
                 _loginState.value = result
                 if (result is Resource.Success){
-                    startDestination = Route.MainNavigation.route
+                    startDestination = MainRoute
                 }
 
             }

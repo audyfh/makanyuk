@@ -1,16 +1,8 @@
 package com.example.makanyuk.di
 
-import com.example.makanyuk.data.network.firebase.auth.AccountRepoImpl
-import com.example.makanyuk.data.network.firebase.auth.AuthRepoImpl
 import com.example.makanyuk.data.network.retrofit.ApiService
-import com.example.makanyuk.data.network.retrofit.RecipeRepoImpl
-import com.example.makanyuk.model.auth.repo.AccountRepo
-import com.example.makanyuk.model.auth.repo.AuthRepo
-import com.example.makanyuk.model.recipe.repo.RecipeRepo
 import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import dagger.Module
 import dagger.Provides
@@ -41,29 +33,5 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFirestore() = Firebase.firestore
-
-    @Provides
-    @Singleton
-    fun provideAuthRepo(
-        firebaseAuth: FirebaseAuth,
-        firestore: FirebaseFirestore
-    ) : AuthRepo = AuthRepoImpl(
-       firebaseAuth, firestore
-    )
-
-    @Provides
-    @Singleton
-    fun provideAccountRepo(
-        firebaseAuth: FirebaseAuth,
-        firestore: FirebaseFirestore
-    ) : AccountRepo = AccountRepoImpl(
-        firebaseAuth,firestore
-    )
-
-    @Provides
-    @Singleton
-    fun provideRecipeRepo(
-        apiService: ApiService
-    ) : RecipeRepo = RecipeRepoImpl(apiService)
 
 }

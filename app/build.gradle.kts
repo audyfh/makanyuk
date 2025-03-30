@@ -67,11 +67,13 @@ dependencies {
 
     //room
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.paging)
     ksp(libs.androidx.room.compiler)
 
     //hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
+
     ksp(libs.hilt.compiler)
 
 
@@ -95,4 +97,8 @@ dependencies {
 
     // gson
     implementation(libs.converter.gson)
+
+    //paging
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
 }

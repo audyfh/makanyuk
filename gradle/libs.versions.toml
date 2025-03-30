@@ -23,6 +23,7 @@ hiltFragment = "1.2.0"
 retrofit = "2.11.0"
 converterGson = "2.11.0"
 coilCompose = "2.6.0"
+paging = "3.3.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -44,6 +45,7 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 androidx-room-runtime = {group = "androidx.room", name ="room-runtime", version.ref="room"}
 androidx-room-compiler = {group = "androidx.room", name ="room-compiler", version.ref = "room"}
+androidx-room-paging = {group = "androidx.room", name="room-paging", version.ref="room"}
 hilt-android = {group="com.google.dagger", name="hilt-android", version.ref="hilt"}
 hilt-compiler = { group="com.google.dagger", name="hilt-compiler", version.ref="hilt"}
 hilt-navigation-compose = {group ="androidx.hilt", name="hilt-navigation-compose", version.ref = "hiltFragment"}
@@ -58,6 +60,8 @@ googleid = {module ="com.google.android.libraries.identity.googleid:googleid", v
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+paging-runtime = {group = "androidx.paging", name="paging-runtime", version.ref = "paging"}
+paging-compose = {group = "androidx.paging", name="paging-compose", version.ref = "paging"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

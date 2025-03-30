@@ -1,7 +1,7 @@
 package com.example.makanyuk.data.network.firebase.auth
 
-import com.example.makanyuk.model.auth.Account
-import com.example.makanyuk.model.auth.repo.AuthRepo
+import com.example.makanyuk.domain.auth.Account
+import com.example.makanyuk.domain.auth.repo.AuthRepo
 import com.example.makanyuk.util.Resource
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
