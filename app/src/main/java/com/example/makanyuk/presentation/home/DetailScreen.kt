@@ -5,7 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,6 +42,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -50,13 +53,14 @@ import com.example.makanyuk.presentation.comps.InstructionCard
 import com.example.makanyuk.presentation.comps.RatingCard
 import com.example.makanyuk.ui.theme.Gray3
 import com.example.makanyuk.ui.theme.Primary100
+import com.example.makanyuk.ui.theme.StarterProjectTheme
 import com.example.makanyuk.util.Resource
 
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    id : Int
+    id: Int
 ) {
     LaunchedEffect(id) {
         viewModel.getDetailRecipe(id)
@@ -71,18 +75,22 @@ fun DetailScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        when(recipe){
+        when (recipe) {
             is Resource.Loading -> {
                 CircularProgressIndicator(
                     modifier = modifier.fillMaxSize(0.8f)
                 )
             }
+
             is Resource.Error -> {
-                Toast.makeText(context,recipe.msg,Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, recipe.msg, Toast.LENGTH_SHORT).show()
             }
+
             is Resource.Success -> {
+                Spacer(modifier = modifier.height(8.dp))
                 Row(
                     modifier = modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -90,8 +98,11 @@ fun DetailScreen(
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "arrow")
                     Icon(Icons.Default.MoreVert, contentDescription = "")
                 }
+                Spacer(modifier = modifier.height(12.dp))
                 Box(
-                    modifier = modifier.fillMaxWidth().height(200.dp)
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
                 ) {
                     AsyncImage(
                         model = recipe.data?.image,
@@ -100,7 +111,7 @@ fun DetailScreen(
                         modifier = modifier.fillMaxSize()
                     )
                     Column(
-                        modifier = modifier.fillMaxHeight(),
+                        modifier = modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.End,
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -108,7 +119,10 @@ fun DetailScreen(
                         Row(
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
-                            Icon(painter = painterResource(R.drawable.ic_timer), contentDescription = "")
+                            Icon(
+                                painter = painterResource(R.drawable.ic_timer),
+                                contentDescription = ""
+                            )
                             Text(
                                 "${recipe.data?.readyInMinutes} min",
                                 style = MaterialTheme.typography.labelMedium,
@@ -129,14 +143,19 @@ fun DetailScreen(
                         }
                     }
                 }
+
+                Spacer(modifier = modifier.height(12.dp))
                 Text(
                     recipe.data?.title ?: "",
-                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.ExtraBold),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.ExtraBold),
                     overflow = TextOverflow.Clip,
                     maxLines = 2
                 )
+                Spacer(modifier = modifier.height(12.dp))
                 Row(
-                    modifier = modifier.fillMaxWidth()
+                    modifier = modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(
                         onClick = {
@@ -150,13 +169,13 @@ fun DetailScreen(
                         ),
                         shape = RoundedCornerShape(20.dp),
                         modifier = modifier
-                            .fillMaxWidth()
+                            .fillMaxWidth(0.5f)
                             .height(30.dp)
 
                     ) {
                         Text(
                             "Ingredient",
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.labelMedium
 
                         )
                     }
@@ -178,7 +197,7 @@ fun DetailScreen(
                     ) {
                         Text(
                             "Procedure",
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.labelMedium
                         )
                     }
                 }
@@ -194,8 +213,9 @@ fun DetailScreen(
                         color = Gray3
                     )
                 }
+                Spacer(modifier = modifier.height(12.dp))
                 LazyColumn(
-
+                    contentPadding = PaddingValues(vertical = 6.dp)
                 ) {
                     when (btnState) {
                         0 -> {
@@ -209,16 +229,17 @@ fun DetailScreen(
                             }
 
                         }
+
                         1 -> {
-                            if (instruction!!.isNotEmpty()){
-                                items(instruction[0].steps.size){
+                            if (instruction!!.isNotEmpty()) {
+                                items(instruction[0].steps.size) {
                                     InstructionCard(
                                         step = instruction[0].steps[it].number,
                                         instruction = instruction[0].steps[it].step
                                     )
                                 }
                             } else {
-                                items(1){
+                                items(1) {
                                     InstructionCard(
                                         step = 1,
                                         instruction = recipe.data?.instructions!!

@@ -1,5 +1,6 @@
 package com.example.makanyuk.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.makanyuk.domain.recipe.Recipe
@@ -43,6 +44,7 @@ class HomeViewModel @Inject constructor(
             val data = _recipes.value.data?.find {
                 it.id == id
             }
+            Log.d("FindRecipe",data.toString())
             if (data != null) {
                 _singleRecipe.value = Resource.Success(data)
             } else {
