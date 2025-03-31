@@ -37,6 +37,7 @@ import androidx.navigation.NavController
 import com.example.makanyuk.R
 import com.example.makanyuk.presentation.comps.ArrowButton
 import com.example.makanyuk.presentation.comps.AuthTextField
+import com.example.makanyuk.presentation.navigation.MainRoute
 import com.example.makanyuk.presentation.navigation.Route
 import com.example.makanyuk.ui.theme.Gray4
 import com.example.makanyuk.ui.theme.Secondary100
@@ -59,7 +60,7 @@ fun LoginScreen(
             is Resource.Error -> Toast.makeText(context,(
                     authState as Resource.Error
                     ).msg ?: "Gagal Login", Toast.LENGTH_SHORT).show()
-            is Resource.Success -> navController.navigate(Route.MainNavigation.route){
+            is Resource.Success -> navController.navigate(MainRoute){
                 popUpTo(navController.graph.id){
                     inclusive = true
                 }

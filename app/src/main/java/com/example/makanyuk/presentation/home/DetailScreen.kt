@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -108,16 +110,17 @@ fun DetailScreen(
                         model = recipe.data?.image,
                         contentDescription = "",
                         contentScale = ContentScale.Crop,
-                        modifier = modifier.fillMaxSize()
+                        modifier = modifier.fillMaxSize().clip(RoundedCornerShape(12.dp))
                     )
                     Column(
-                        modifier = modifier.fillMaxSize(),
+                        modifier = modifier.fillMaxSize().padding(12.dp),
                         horizontalAlignment = Alignment.End,
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
                         RatingCard(rating = recipe.data?.spoonacularScore ?: 0.0)
                         Row(
-                            horizontalArrangement = Arrangement.SpaceAround
+                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
                                 painter = painterResource(R.drawable.ic_timer),
@@ -128,6 +131,7 @@ fun DetailScreen(
                                 style = MaterialTheme.typography.labelMedium,
                                 color = Color.White
                             )
+                            Spacer(modifier = modifier.width(8.dp))
                             Box(
                                 modifier = modifier
                                     .clip(CircleShape)
@@ -137,7 +141,8 @@ fun DetailScreen(
                                 Icon(
                                     painter = painterResource(R.drawable.ic_saved),
                                     contentDescription = null,
-                                    tint = Color.White
+                                    tint = Color.White,
+                                    modifier = modifier.size(20.dp)
                                 )
                             }
                         }
@@ -170,12 +175,12 @@ fun DetailScreen(
                         shape = RoundedCornerShape(20.dp),
                         modifier = modifier
                             .fillMaxWidth(0.5f)
-                            .height(30.dp)
+                            .height(40.dp)
 
                     ) {
                         Text(
                             "Ingredient",
-                            style = MaterialTheme.typography.labelMedium
+                            style = MaterialTheme.typography.bodySmall
 
                         )
                     }
@@ -192,21 +197,25 @@ fun DetailScreen(
                         shape = RoundedCornerShape(20.dp),
                         modifier = modifier
                             .fillMaxWidth()
-                            .height(30.dp)
+                            .height(40.dp)
 
                     ) {
                         Text(
                             "Procedure",
-                            style = MaterialTheme.typography.labelMedium
+                            style = MaterialTheme.typography.bodySmall
                         )
                     }
                 }
-                Row {
+                Spacer(modifier = modifier.height(8.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_serve),
                         contentDescription = "",
                         tint = Gray3
                     )
+                    Spacer(modifier.width(5.dp))
                     Text(
                         recipe.data?.servings.toString(),
                         style = MaterialTheme.typography.labelMedium,
@@ -226,6 +235,7 @@ fun DetailScreen(
                                     }",
                                     title = ingredients[it].name
                                 )
+                                Spacer(modifier = modifier.height(5.dp))
                             }
 
                         }
@@ -237,6 +247,7 @@ fun DetailScreen(
                                         step = instruction[0].steps[it].number,
                                         instruction = instruction[0].steps[it].step
                                     )
+                                    Spacer(modifier = modifier.height(5.dp))
                                 }
                             } else {
                                 items(1) {

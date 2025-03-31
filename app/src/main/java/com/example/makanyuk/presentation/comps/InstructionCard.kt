@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.example.makanyuk.ui.theme.Gray1
 import com.example.makanyuk.ui.theme.Gray3
 import com.example.makanyuk.ui.theme.Gray4
 
@@ -26,7 +27,7 @@ fun InstructionCard(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .height(130.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(color = Gray4)
             .padding(12.dp),
@@ -34,7 +35,7 @@ fun InstructionCard(
         Column {
             Text("Step $step", style = MaterialTheme.typography.bodyMedium)
             Spacer(modifier.height(10.dp))
-            Text(instruction, style = MaterialTheme.typography.bodySmall, color = Gray3)
+            Text(instruction, style = MaterialTheme.typography.bodySmall, color = Gray1)
         }
     }
 }

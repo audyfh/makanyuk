@@ -29,7 +29,7 @@ fun IngredientCard(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(60.dp)
+            .height(100.dp)
             .clip(RoundedCornerShape(12.dp))
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -39,7 +39,7 @@ fun IngredientCard(
             model = imgUrl,
             contentScale = ContentScale.Crop,
             contentDescription = null,
-            modifier = modifier.fillMaxHeight().width(50.dp).clip(RoundedCornerShape(12.dp))
+            modifier = modifier.fillMaxHeight().width(70.dp).clip(RoundedCornerShape(12.dp))
         )
         Spacer(modifier = modifier.width(10.dp))
         Text(title, style = MaterialTheme.typography.bodyMedium)
