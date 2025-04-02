@@ -38,7 +38,7 @@ import com.example.makanyuk.R
 import com.example.makanyuk.presentation.comps.ArrowButton
 import com.example.makanyuk.presentation.comps.AuthTextField
 import com.example.makanyuk.presentation.navigation.MainRoute
-import com.example.makanyuk.presentation.navigation.Route
+import com.example.makanyuk.presentation.navigation.RegisterRoute
 import com.example.makanyuk.ui.theme.Gray4
 import com.example.makanyuk.ui.theme.Secondary100
 import com.example.makanyuk.ui.theme.StarterProjectTheme
@@ -138,7 +138,7 @@ fun LoginScreen(
         }
         Row(
             modifier.clickable {
-                navController.navigate(Route.RegisterScreen.route)
+                navController.navigate(RegisterRoute)
             }
         ) {
             Text("Dont have an Account? ", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold))

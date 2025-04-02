@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.Flow
 interface RoomRepository {
 
     suspend fun insertRecipe(recipe: Recipe)
-    fun getAllRecipe() : Flow<Resource<List<Recipe>>>
+    suspend fun getAllRecipe() : Flow<Resource<List<Recipe>>>
     suspend fun deleteRecipe(recipe: Recipe)
+    suspend fun getRecipeById(id: Int) : Resource<Recipe>
+    suspend fun isSaved(id: Int) : Boolean
+
 }

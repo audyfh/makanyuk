@@ -8,7 +8,6 @@ import com.example.makanyuk.domain.auth.repo.AuthRepo
 import com.example.makanyuk.presentation.navigation.AppRoute
 import com.example.makanyuk.presentation.navigation.LoginRoute
 import com.example.makanyuk.presentation.navigation.MainRoute
-import com.example.makanyuk.presentation.navigation.Route
 import com.example.makanyuk.util.Resource
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser

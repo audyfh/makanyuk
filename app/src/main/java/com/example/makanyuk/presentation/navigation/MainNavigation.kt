@@ -36,6 +36,7 @@ import com.example.makanyuk.presentation.add.AddScreen
 import com.example.makanyuk.presentation.home.DetailScreen
 import com.example.makanyuk.presentation.notif.NotifScreen
 import com.example.makanyuk.presentation.profile.ProfileScreen
+import com.example.makanyuk.presentation.saved.SavedDetailScreen
 
 @Composable
 fun MainNavigation(
@@ -110,7 +111,13 @@ fun MainNavigation(
                 )
             }
             composable<SavedRoute>{
-                SavedScren()
+                SavedScren(
+                    navigateDetail = {
+                        navController.navigate((SavedDetailRoute(
+                            id = it
+                        )))
+                    }
+                )
             }
             composable<DetailRoute>{
                 val id = it.toRoute<DetailRoute>()
@@ -126,6 +133,12 @@ fun MainNavigation(
             }
             composable<AddRoute>{
                 AddScreen()
+            }
+            composable<SavedDetailRoute>{
+                val id = it.toRoute<SavedDetailRoute>()
+                SavedDetailScreen(
+                    id = id.id
+                )
             }
 
             

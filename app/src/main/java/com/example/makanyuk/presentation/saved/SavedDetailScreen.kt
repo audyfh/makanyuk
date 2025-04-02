@@ -1,4 +1,4 @@
-package com.example.makanyuk.presentation.home
+package com.example.makanyuk.presentation.saved
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -33,7 +32,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -45,28 +43,25 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.makanyuk.R
-import com.example.makanyuk.domain.recipe.Recipe
 import com.example.makanyuk.presentation.comps.IngredientCard
 import com.example.makanyuk.presentation.comps.InstructionCard
 import com.example.makanyuk.presentation.comps.RatingCard
 import com.example.makanyuk.ui.theme.Gray3
 import com.example.makanyuk.ui.theme.Primary100
-import com.example.makanyuk.ui.theme.StarterProjectTheme
 import com.example.makanyuk.util.Resource
 
 @Composable
-fun DetailScreen(
+fun SavedDetailScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: SavedViewModel = hiltViewModel(),
     id: Int
 ) {
     LaunchedEffect(id) {
-        viewModel.getDetailRecipe(id)
+        viewModel.getRecipeDetail(id = id)
     }
 
     val recipe by viewModel.singleRecipe.collectAsState()

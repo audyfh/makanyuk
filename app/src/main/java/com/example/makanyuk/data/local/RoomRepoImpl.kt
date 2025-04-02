@@ -19,14 +19,17 @@ class RoomRepoImpl @Inject constructor(
        )
     }
 
-    override fun getAllRecipe():Flow<Resource<List<Recipe>>> {
+    override suspend fun getAllRecipe():Flow<Resource<List<Recipe>>> {
         return flow {
             emit(Resource.Loading())
-            recipeDao.getAllRecipe().map {
-               Resource.Success(it.map { recipe ->
-                   RecipeMapper.entityToDomain(recipe)
-               })
-            }.collectLatest { emit(it) }
+            val data = recipeDao.getAllRecipe().map {
+                it.map {
+                    RecipeMapper.entityToDomain(it)
+                }
+            }
+            data.collect{
+                emit(Resource.Success(it))
+            }
 
         }
     }
@@ -35,5 +38,14 @@ class RoomRepoImpl @Inject constructor(
         recipeDao.deleteRecipe(
             RecipeMapper.domainToEntity(recipe)
         )
+    }
+
+    override suspend fun getRecipeById(id: Int): Resource<Recipe> {
+        val recipe = recipeDao.getRecipeById(id)?.let { RecipeMapper.entityToDomain(it) }
+        return Resource.Success(recipe)
+    }
+
+    override suspend fun isSaved(id: Int): Boolean {
+        return recipeDao.getRecipeById(id) != null
     }
 }

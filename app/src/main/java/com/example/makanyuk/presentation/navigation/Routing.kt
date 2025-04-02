@@ -27,6 +27,11 @@ data class DetailRoute(
 ) : AppRoute
 
 @Serializable
+data class SavedDetailRoute(
+    val id : Int
+) : AppRoute
+
+@Serializable
 object NotifRoute : AppRoute
 
 @Serializable

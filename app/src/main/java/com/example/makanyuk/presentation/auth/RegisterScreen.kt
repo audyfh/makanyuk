@@ -38,7 +38,7 @@ import androidx.navigation.NavController
 import com.example.makanyuk.R
 import com.example.makanyuk.presentation.comps.ArrowButton
 import com.example.makanyuk.presentation.comps.AuthTextField
-import com.example.makanyuk.presentation.navigation.Route
+import com.example.makanyuk.presentation.navigation.LoginRoute
 import com.example.makanyuk.ui.theme.Gray4
 import com.example.makanyuk.ui.theme.Secondary100
 import com.example.makanyuk.ui.theme.StarterProjectTheme
@@ -61,7 +61,7 @@ fun RegisterScreen(
         when(authState){
             is Resource.Loading -> {}
             is Resource.Error -> Toast.makeText(context,"error",Toast.LENGTH_SHORT).show()
-            is Resource.Success -> navController.navigate(Route.LoginScreen.route)
+            is Resource.Success -> navController.navigate(LoginRoute)
         }
     }
     Column(
