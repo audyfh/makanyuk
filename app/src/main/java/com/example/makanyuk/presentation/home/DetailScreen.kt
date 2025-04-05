@@ -48,6 +48,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.makanyuk.R
 import com.example.makanyuk.domain.recipe.Recipe
@@ -63,10 +64,14 @@ import com.example.makanyuk.util.Resource
 fun DetailScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    id: Int
+    id: Int,
+    navController: NavController
 ) {
+
+    val isSaved by viewModel.savedState.collectAsState()
     LaunchedEffect(id) {
         viewModel.getDetailRecipe(id)
+        viewModel.getSavedState(id)
     }
 
     val recipe by viewModel.singleRecipe.collectAsState()
@@ -98,7 +103,10 @@ fun DetailScreen(
                     modifier = modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "arrow")
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "arrow",
+                        modifier = modifier.clickable {
+                            navController.navigateUp()
+                        })
                     Icon(Icons.Default.MoreVert, contentDescription = "")
                 }
                 Spacer(modifier = modifier.height(12.dp))
@@ -136,7 +144,7 @@ fun DetailScreen(
                             Box(
                                 modifier = modifier
                                     .clip(CircleShape)
-                                    .background(color = Primary100)
+                                    .background(color = if (isSaved) Primary100 else Color.White)
                                     .padding(4.dp)
                                     .clickable {
                                         viewModel.toggleSave(recipe.data!!)
@@ -145,7 +153,7 @@ fun DetailScreen(
                                 Icon(
                                     painter = painterResource(R.drawable.ic_saved),
                                     contentDescription = null,
-                                    tint = Color.White,
+                                    tint = if(isSaved) Color.White else Primary100,
                                     modifier = modifier.size(20.dp)
                                 )
                             }

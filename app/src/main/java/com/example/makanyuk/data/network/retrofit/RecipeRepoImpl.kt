@@ -6,6 +6,7 @@ import com.example.makanyuk.domain.recipe.Recipe
 import com.example.makanyuk.domain.recipe.mealplan.MealPlan
 import com.example.makanyuk.domain.recipe.repo.RecipeRepo
 import com.example.makanyuk.util.Resource
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -18,7 +19,8 @@ class RecipeRepoImpl @Inject constructor(
             try {
                 emit(Resource.Loading())
                 val response = apiService.getRecipes()
-                Log.d("dataresep",response.toString())
+                val json = Gson().toJson(response.body())
+                Log.d("dataresep", json)
                 if (response.isSuccessful) {
                     val data = response.body()?.recipes?.map {
                         NetworkMapper.responseToDomain(it)

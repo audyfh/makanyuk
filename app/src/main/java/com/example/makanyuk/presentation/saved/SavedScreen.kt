@@ -34,6 +34,7 @@ fun SavedScren(
     Column(
         modifier = Modifier.fillMaxSize().padding(12.dp)
     ) {
+        Spacer(modifier.height(12.dp))
         Row (
             modifier = modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,

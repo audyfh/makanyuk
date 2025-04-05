@@ -1,6 +1,7 @@
 package com.example.makanyuk.presentation.home
 
 import android.util.Log
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.makanyuk.domain.recipe.Recipe
@@ -27,9 +28,18 @@ class HomeViewModel @Inject constructor(
     private var _singleRecipe = MutableStateFlow<Resource<Recipe>>(Resource.Loading())
     val singleRecipe: StateFlow<Resource<Recipe>> = _singleRecipe.asStateFlow()
 
+    private var _savedState = MutableStateFlow(false)
+    val savedState : StateFlow<Boolean> = _savedState.asStateFlow()
+
 
     init {
         getRecipes()
+    }
+
+    fun getSavedState(id:Int){
+        viewModelScope.launch {
+            roomRepository.isSaved(id)
+        }
     }
 
     private fun getRecipes() {
@@ -62,8 +72,10 @@ class HomeViewModel @Inject constructor(
             val saved = roomRepository.isSaved(recipe.id)
             if (saved){
                 roomRepository.deleteRecipe(recipe)
+                _savedState.value = false
             } else {
                 roomRepository.insertRecipe(recipe)
+                _savedState.value = true
             }
         }
     }

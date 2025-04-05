@@ -122,7 +122,8 @@ fun MainNavigation(
             composable<DetailRoute>{
                 val id = it.toRoute<DetailRoute>()
                 DetailScreen(
-                    id = id.id
+                    id = id.id,
+                    navController = navController
                 )
             }
             composable<NotifRoute>{
@@ -137,7 +138,8 @@ fun MainNavigation(
             composable<SavedDetailRoute>{
                 val id = it.toRoute<SavedDetailRoute>()
                 SavedDetailScreen(
-                    id = id.id
+                    id = id.id,
+                    navController = navController
                 )
             }
 
