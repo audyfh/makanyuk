@@ -1,5 +1,6 @@
 package com.example.makanyuk.data.network.retrofit
 
+import com.example.makanyuk.BuildConfig
 import com.example.makanyuk.domain.recipe.mealplan.MealPlan
 import com.example.makanyuk.domain.recipe.Recipe
 import com.example.makanyuk.domain.recipe.RecipeModel
@@ -11,15 +12,15 @@ import retrofit2.http.Path
 
 interface ApiService {
 
-    @GET("recipes/random?apiKey=${Constants.apiKey}&number=10")
+    @GET("recipes/random?apiKey=${BuildConfig.Recipe_Key}&number=10")
     suspend fun getRecipes() : Response<RecipeListResponse>
 
-    @GET("recipes/{id}/information?apiKey=${Constants.apiKey}")
+    @GET("recipes/{id}/information?apiKey=${BuildConfig.Recipe_Key}")
     suspend fun getRecipeId(
         @Path("id") id: Int
     ) : Response<RecipeResponse>
 
-    @GET("mealplanner/generate?apiKey=${Constants.apiKey}")
+    @GET("mealplanner/generate?apiKey=${BuildConfig.Recipe_Key}")
     suspend fun getMealPlan() : Response<MealPlanResponse>
 
     companion object{

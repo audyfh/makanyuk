@@ -18,7 +18,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField("String", "Recipe_Key", "\"${property("Recipe_Key")}\"")
+        buildConfigField("String", "Gemini_Key", "\"${property("Gemini_Key")}\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -40,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -102,4 +104,7 @@ dependencies {
     //paging
     implementation(libs.paging.runtime)
     implementation(libs.paging.compose)
+
+    //gemini
+    implementation(libs.generativeai)
 }

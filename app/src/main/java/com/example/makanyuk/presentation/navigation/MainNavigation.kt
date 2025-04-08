@@ -31,8 +31,12 @@ import com.example.makanyuk.ui.theme.StarterProjectTheme
 import androidx.compose.material.FabPosition
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import com.example.makanyuk.presentation.add.AddScreen
+import com.example.makanyuk.presentation.ai.AiScreen
+import com.example.makanyuk.presentation.ai.TrackScreen
 import com.example.makanyuk.presentation.home.DetailScreen
 import com.example.makanyuk.presentation.notif.NotifScreen
 import com.example.makanyuk.presentation.profile.ProfileScreen
@@ -77,15 +81,14 @@ fun MainNavigation(
             FloatingActionButton(
                 shape = CircleShape,
                 onClick = {
-                        AddRoute.let {
-                            navController.navigate(it){
-                                popUpTo(it) {
-                                    saveState = true
-                                }
-                                restoreState = true
-                                launchSingleTop = true
-                            }
-                        }
+                    selectedItem = -1
+                       navController.navigate(AI){
+                           popUpTo(navController.graph.findStartDestination().id){
+                               saveState = true
+                           }
+                           launchSingleTop = true
+                           restoreState = true
+                       }
                 },
                 containerColor = Primary100,
                 modifier = modifier.size(50.dp)
@@ -132,8 +135,13 @@ fun MainNavigation(
             composable<ProfileRoute>{
                 ProfileScreen()
             }
-            composable<AddRoute>{
-                AddScreen()
+            navigation<AI>(startDestination = AIRoute){
+                composable<AIRoute>{
+                    AiScreen(navController = navController)
+                }
+                composable<TrackRoute>{
+                    TrackScreen()
+                }
             }
             composable<SavedDetailRoute>{
                 val id = it.toRoute<SavedDetailRoute>()
@@ -142,6 +150,7 @@ fun MainNavigation(
                     navController = navController
                 )
             }
+
 
             
         }
@@ -153,13 +162,11 @@ private fun navigateToTab(
     route: AppRoute
 ) {
     navController.navigate(route) {
-        navController.graph.startDestinationRoute?.let { homescreen ->
-            popUpTo(homescreen) {
-                saveState = true
-            }
-            restoreState = true
-            launchSingleTop = true
-        }
+       popUpTo(0){
+           saveState = true
+       }
+        launchSingleTop = true
+        restoreState = true
     }
 }
 

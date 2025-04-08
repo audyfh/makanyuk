@@ -39,3 +39,12 @@ object ProfileRoute : AppRoute
 
 @Serializable
 object AddRoute : AppRoute
+
+@Serializable
+object AI : AppRoute
+
+@Serializable
+object AIRoute : AppRoute
+
+@Serializable
+object TrackRoute : AppRoute
