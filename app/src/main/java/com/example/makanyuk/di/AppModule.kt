@@ -2,10 +2,12 @@ package com.example.makanyuk.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.makanyuk.BuildConfig
 import com.example.makanyuk.data.local.RecipeDB
 import com.example.makanyuk.data.local.RecipeDao
 import com.example.makanyuk.data.network.retrofit.ApiService
 import com.example.makanyuk.domain.recipe.Recipe
+import com.google.ai.client.generativeai.GenerativeModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -51,5 +53,12 @@ object AppModule {
     fun provideRecipeDao(
         db : RecipeDB
     ) : RecipeDao = db.recipeDao()
+
+    @Provides
+    @Singleton
+    fun provideGemini() : GenerativeModel = GenerativeModel(
+        modelName = "gemini-2.0-flash-001",
+        apiKey = BuildConfig.Gemini_Key
+    )
 
 }

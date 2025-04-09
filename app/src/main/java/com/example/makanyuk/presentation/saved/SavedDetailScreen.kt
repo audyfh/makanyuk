@@ -45,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.makanyuk.R
 import com.example.makanyuk.presentation.comps.IngredientCard
@@ -58,7 +59,8 @@ import com.example.makanyuk.util.Resource
 fun SavedDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: SavedViewModel = hiltViewModel(),
-    id: Int
+    id: Int,
+    navController: NavController
 ) {
     LaunchedEffect(id) {
         viewModel.getRecipeDetail(id = id)
@@ -88,12 +90,15 @@ fun SavedDetailScreen(
             }
 
             is Resource.Success -> {
-                Spacer(modifier = modifier.height(8.dp))
+                Spacer(modifier = modifier.height(12.dp))
                 Row(
                     modifier = modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "arrow")
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "arrow",
+                        modifier = modifier.clickable {
+                            navController.navigateUp()
+                        })
                     Icon(Icons.Default.MoreVert, contentDescription = "")
                 }
                 Spacer(modifier = modifier.height(12.dp))

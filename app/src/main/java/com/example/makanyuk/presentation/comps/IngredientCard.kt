@@ -1,5 +1,6 @@
 package com.example.makanyuk.presentation.comps
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.makanyuk.ui.theme.Gray4
 import org.jetbrains.annotations.Async
 
 @Composable
@@ -31,7 +33,8 @@ fun IngredientCard(
             .fillMaxWidth()
             .height(100.dp)
             .clip(RoundedCornerShape(12.dp))
-            .padding(12.dp),
+            .padding(12.dp)
+            .background(color = Gray4),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {

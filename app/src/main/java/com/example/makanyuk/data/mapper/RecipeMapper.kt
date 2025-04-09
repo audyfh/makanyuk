@@ -1,7 +1,10 @@
 package com.example.makanyuk.data.mapper
 
 import com.example.makanyuk.data.local.RecipeEntity
+import com.example.makanyuk.data.network.retrofit.MealPlanResponse
 import com.example.makanyuk.domain.recipe.Recipe
+import com.example.makanyuk.domain.recipe.mealplan.Meal
+import com.example.makanyuk.domain.recipe.mealplan.MealPlan
 
 object RecipeMapper {
     fun entityToDomain(recipeEntity: RecipeEntity) : Recipe {
@@ -87,4 +90,8 @@ object RecipeMapper {
             weightWatcherSmartPoints = recipe.weightWatcherSmartPoints
         )
     }
+
+
+
+
 }
