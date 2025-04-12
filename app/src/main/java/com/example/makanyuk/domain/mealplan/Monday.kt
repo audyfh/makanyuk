@@ -1,4 +1,4 @@
-package com.example.makanyuk.domain.recipe.mealplan
+package com.example.makanyuk.domain.mealplan
 
 data class Monday(
     val meals: List<Meal>,

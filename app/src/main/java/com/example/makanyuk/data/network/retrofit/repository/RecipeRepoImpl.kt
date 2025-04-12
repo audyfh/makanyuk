@@ -1,11 +1,14 @@
-package com.example.makanyuk.data.network.retrofit
+package com.example.makanyuk.data.network.retrofit.repository
 
 import android.util.Log
 import com.example.makanyuk.data.mapper.NetworkMapper
+import com.example.makanyuk.data.network.retrofit.ApiService
+import com.example.makanyuk.domain.mealplan.DayMeal
 import com.example.makanyuk.domain.recipe.Recipe
-import com.example.makanyuk.domain.recipe.mealplan.MealPlan
+import com.example.makanyuk.domain.mealplan.MealPlan
 import com.example.makanyuk.domain.recipe.repo.RecipeRepo
 import com.example.makanyuk.util.Resource
+import com.example.makanyuk.util.Utility
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -55,13 +58,14 @@ class RecipeRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getMealPlan(): Flow<Resource<MealPlan>> {
+    override suspend fun getMealPlan(): Flow<Resource<List<DayMeal>>> {
         return flow {
             try {
                 emit(Resource.Loading())
                 val response = apiService.getMealPlan()
                 if (response.isSuccessful) {
-                    val data = response.body()?.let { NetworkMapper.mealResponseToDomain(it) }
+                    val res = response.body()?.let { NetworkMapper.mealResponseToDomain(it) }
+                    val data = Utility.toDayMeal(res!!.week)
                     emit(Resource.Success(data))
                 }
             } catch (e: Exception) {

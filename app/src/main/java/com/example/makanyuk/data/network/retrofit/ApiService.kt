@@ -1,11 +1,9 @@
 package com.example.makanyuk.data.network.retrofit
 
 import com.example.makanyuk.BuildConfig
-import com.example.makanyuk.domain.recipe.mealplan.MealPlan
-import com.example.makanyuk.domain.recipe.Recipe
-import com.example.makanyuk.domain.recipe.RecipeModel
-import com.example.makanyuk.util.Constants
-import com.google.firestore.v1.ListenResponse
+import com.example.makanyuk.data.network.retrofit.model.MealPlanResponse
+import com.example.makanyuk.data.network.retrofit.model.RecipeListResponse
+import com.example.makanyuk.data.network.retrofit.model.RecipeResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

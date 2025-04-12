@@ -1,9 +1,9 @@
 package com.example.makanyuk.data.mapper
 
-import com.example.makanyuk.data.network.retrofit.MealPlanResponse
-import com.example.makanyuk.data.network.retrofit.RecipeResponse
+import com.example.makanyuk.data.network.retrofit.model.MealPlanResponse
+import com.example.makanyuk.data.network.retrofit.model.RecipeResponse
 import com.example.makanyuk.domain.recipe.Recipe
-import com.example.makanyuk.domain.recipe.mealplan.MealPlan
+import com.example.makanyuk.domain.mealplan.MealPlan
 
 object NetworkMapper {
     

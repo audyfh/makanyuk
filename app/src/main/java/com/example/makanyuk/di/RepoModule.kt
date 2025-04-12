@@ -3,7 +3,7 @@ package com.example.makanyuk.di
 import com.example.makanyuk.data.local.RoomRepoImpl
 import com.example.makanyuk.data.network.firebase.auth.AccountRepoImpl
 import com.example.makanyuk.data.network.firebase.auth.AuthRepoImpl
-import com.example.makanyuk.data.network.retrofit.RecipeRepoImpl
+import com.example.makanyuk.data.network.retrofit.repository.RecipeRepoImpl
 import com.example.makanyuk.domain.auth.repo.AccountRepo
 import com.example.makanyuk.domain.auth.repo.AuthRepo
 import com.example.makanyuk.domain.recipe.repo.RecipeRepo

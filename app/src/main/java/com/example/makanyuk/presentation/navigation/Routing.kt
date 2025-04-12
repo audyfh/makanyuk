@@ -48,3 +48,6 @@ object AIRoute : AppRoute
 
 @Serializable
 object TrackRoute : AppRoute
+
+@Serializable
+object MealPlanRoute : AppRoute

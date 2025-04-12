@@ -16,10 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.makanyuk.ui.theme.Gray4
+import com.example.makanyuk.ui.theme.Primary60
 import org.jetbrains.annotations.Async
 
 @Composable
@@ -33,8 +35,8 @@ fun IngredientCard(
             .fillMaxWidth()
             .height(100.dp)
             .clip(RoundedCornerShape(12.dp))
-            .padding(12.dp)
-            .background(color = Gray4),
+            .background(color = Primary60)
+            .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -45,7 +47,7 @@ fun IngredientCard(
             modifier = modifier.fillMaxHeight().width(70.dp).clip(RoundedCornerShape(12.dp))
         )
         Spacer(modifier = modifier.width(10.dp))
-        Text(title, style = MaterialTheme.typography.bodyMedium)
+        Text(title, style = MaterialTheme.typography.bodyMedium, color = Color.White)
     }
 
 }

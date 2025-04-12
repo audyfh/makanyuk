@@ -38,6 +38,7 @@ import com.example.makanyuk.presentation.add.AddScreen
 import com.example.makanyuk.presentation.ai.AiScreen
 import com.example.makanyuk.presentation.ai.TrackScreen
 import com.example.makanyuk.presentation.home.DetailScreen
+import com.example.makanyuk.presentation.mealplan.MealPlanScreen
 import com.example.makanyuk.presentation.notif.NotifScreen
 import com.example.makanyuk.presentation.profile.ProfileScreen
 import com.example.makanyuk.presentation.saved.SavedDetailScreen
@@ -67,7 +68,7 @@ fun MainNavigation(
                         when (it) {
                             0 -> navigateToTab(navController, HomeRoute)
                             1 -> navigateToTab(navController, SavedRoute)
-                            2 -> navigateToTab(navController, NotifRoute)
+                            2 -> navigateToTab(navController, MealPlanRoute)
                             3 -> navigateToTab(navController, ProfileRoute)
                         }
                     },
@@ -129,8 +130,8 @@ fun MainNavigation(
                     navController = navController
                 )
             }
-            composable<NotifRoute>{
-                NotifScreen()
+            composable<MealPlanRoute>{
+                MealPlanScreen()
             }
             composable<ProfileRoute>{
                 ProfileScreen()
