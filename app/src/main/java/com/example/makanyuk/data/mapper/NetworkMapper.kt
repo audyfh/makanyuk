@@ -2,8 +2,10 @@ package com.example.makanyuk.data.mapper
 
 import com.example.makanyuk.data.network.retrofit.model.MealPlanResponse
 import com.example.makanyuk.data.network.retrofit.model.RecipeResponse
+import com.example.makanyuk.data.network.retrofit.model.SearchResponse
 import com.example.makanyuk.domain.recipe.Recipe
 import com.example.makanyuk.domain.mealplan.MealPlan
+import com.example.makanyuk.domain.recipe.SearchRecipe
 
 object NetworkMapper {
     
@@ -102,4 +104,15 @@ object NetworkMapper {
             week = meal.week
         )
     }
+
+    fun searchResponseToDomain(searchResponse: SearchResponse) : SearchRecipe{
+        return SearchRecipe(
+            number = searchResponse.number,
+            totalResults = searchResponse.totalResults,
+            offset = searchResponse.offset,
+            results = searchResponse.results
+        )
+    }
+
+
 }

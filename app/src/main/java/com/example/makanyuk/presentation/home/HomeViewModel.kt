@@ -5,6 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.makanyuk.domain.recipe.Recipe
+import com.example.makanyuk.domain.recipe.Result
 import com.example.makanyuk.domain.recipe.repo.RecipeRepo
 import com.example.makanyuk.domain.repository.RoomRepository
 import com.example.makanyuk.util.Resource
@@ -30,6 +31,9 @@ class HomeViewModel @Inject constructor(
 
     private var _savedState = MutableStateFlow(false)
     val savedState : StateFlow<Boolean> = _savedState.asStateFlow()
+
+    private var _searchResult = MutableStateFlow<Resource<List<Result>>>(Resource.Loading())
+    val searchResult : StateFlow<Resource<List<Result>>> = _searchResult.asStateFlow()
 
 
     init {
@@ -76,6 +80,14 @@ class HomeViewModel @Inject constructor(
             } else {
                 roomRepository.insertRecipe(recipe)
                 _savedState.value = true
+            }
+        }
+    }
+
+    fun searchRecipe(query: String) {
+        viewModelScope.launch {
+            repo.searchRecipe(query).collectLatest {
+                _searchResult.value = it
             }
         }
     }

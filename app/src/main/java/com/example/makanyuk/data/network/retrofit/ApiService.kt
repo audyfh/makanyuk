@@ -4,9 +4,11 @@ import com.example.makanyuk.BuildConfig
 import com.example.makanyuk.data.network.retrofit.model.MealPlanResponse
 import com.example.makanyuk.data.network.retrofit.model.RecipeListResponse
 import com.example.makanyuk.data.network.retrofit.model.RecipeResponse
+import com.example.makanyuk.data.network.retrofit.model.SearchResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -20,6 +22,11 @@ interface ApiService {
 
     @GET("mealplanner/generate?apiKey=${BuildConfig.Recipe_Key}")
     suspend fun getMealPlan() : Response<MealPlanResponse>
+
+    @GET("recipes/complexSearch?apiKey=${BuildConfig.Recipe_Key}")
+    suspend fun searchRecipe(
+        @Query("query") query: String
+    ) : Response<SearchResponse>
 
     companion object{
         const val BASE_URL = "https://api.spoonacular.com/"

@@ -2,6 +2,7 @@ package com.example.makanyuk.presentation.comps
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -17,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.example.makanyuk.ui.theme.Gray4
+import java.security.Key
 
 @ExperimentalMaterial3Api
 @Composable
@@ -24,7 +26,8 @@ fun CustomSearchField(
     modifier: Modifier = Modifier,
     placeholder: String,
     input: String,
-    onValueChange : (String) -> Unit
+    onValueChange : (String) -> Unit,
+    onSearch: () -> Unit
 ) {
 
     OutlinedTextField(
@@ -45,6 +48,10 @@ fun CustomSearchField(
         ),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions(
+            onSearch = {onSearch()},
+            onDone = {onSearch()}
         ),
         placeholder = {
             Text(

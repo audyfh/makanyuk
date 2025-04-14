@@ -38,8 +38,9 @@ import com.example.makanyuk.presentation.add.AddScreen
 import com.example.makanyuk.presentation.ai.AiScreen
 import com.example.makanyuk.presentation.ai.TrackScreen
 import com.example.makanyuk.presentation.home.DetailScreen
+import com.example.makanyuk.presentation.home.SearchScreen
 import com.example.makanyuk.presentation.mealplan.MealPlanScreen
-import com.example.makanyuk.presentation.notif.NotifScreen
+
 import com.example.makanyuk.presentation.profile.ProfileScreen
 import com.example.makanyuk.presentation.saved.SavedDetailScreen
 
@@ -111,6 +112,11 @@ fun MainNavigation(
                         navController.navigate(DetailRoute(
                             id = it
                         ))
+                    },
+                    navigateSearch = {
+                        navController.navigate(SearchRoute(
+                            query = it
+                        ))
                     }
                 )
             }
@@ -150,6 +156,12 @@ fun MainNavigation(
                     id = id.id,
                     navController = navController
                 )
+            }
+            composable<SearchRoute> {
+                val query = it.toRoute<SearchRoute>()
+                SearchScreen(query = query.query){
+
+                }
             }
 
 

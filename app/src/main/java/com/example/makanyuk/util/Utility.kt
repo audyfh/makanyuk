@@ -1,8 +1,13 @@
 package com.example.makanyuk.util
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import com.example.makanyuk.domain.mealplan.DayMeal
 import com.example.makanyuk.domain.mealplan.Meal
 import com.example.makanyuk.domain.mealplan.Week
+import java.io.IOException
 
 object Utility {
 
@@ -29,5 +34,18 @@ object Utility {
             DayMeal(day = "Friday", meal = week.friday.meals, nutrients = week.friday.nutrients),
             DayMeal(day = "Saturday", meal = week.saturday.meals, nutrients = week.saturday.nutrients),
         )
+    }
+
+    fun uriToBitmap(
+        context: Context,
+        uri: Uri
+    ): Bitmap? {
+        return try {
+            val inputStream = context.contentResolver.openInputStream(uri)
+            BitmapFactory.decodeStream(inputStream)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
     }
 }

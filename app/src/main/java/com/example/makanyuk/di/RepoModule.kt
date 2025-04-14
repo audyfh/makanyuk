@@ -3,7 +3,9 @@ package com.example.makanyuk.di
 import com.example.makanyuk.data.local.RoomRepoImpl
 import com.example.makanyuk.data.network.firebase.auth.AccountRepoImpl
 import com.example.makanyuk.data.network.firebase.auth.AuthRepoImpl
+import com.example.makanyuk.data.network.gemini.AiRepoImpl
 import com.example.makanyuk.data.network.retrofit.repository.RecipeRepoImpl
+import com.example.makanyuk.domain.ai.repo.AIRepository
 import com.example.makanyuk.domain.auth.repo.AccountRepo
 import com.example.makanyuk.domain.auth.repo.AuthRepo
 import com.example.makanyuk.domain.recipe.repo.RecipeRepo
@@ -41,4 +43,11 @@ abstract class RepoModule {
     abstract fun provideRoomRepo(
         roomRepoImpl: RoomRepoImpl
     ) : RoomRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideAiRepo(
+        aiRepoImpl: AiRepoImpl
+    ) : AIRepository
+
 }

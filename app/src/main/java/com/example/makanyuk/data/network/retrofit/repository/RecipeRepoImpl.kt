@@ -6,6 +6,7 @@ import com.example.makanyuk.data.network.retrofit.ApiService
 import com.example.makanyuk.domain.mealplan.DayMeal
 import com.example.makanyuk.domain.recipe.Recipe
 import com.example.makanyuk.domain.mealplan.MealPlan
+import com.example.makanyuk.domain.recipe.Result
 import com.example.makanyuk.domain.recipe.repo.RecipeRepo
 import com.example.makanyuk.util.Resource
 import com.example.makanyuk.util.Utility
@@ -67,6 +68,21 @@ class RecipeRepoImpl @Inject constructor(
                     val res = response.body()?.let { NetworkMapper.mealResponseToDomain(it) }
                     val data = Utility.toDayMeal(res!!.week)
                     emit(Resource.Success(data))
+                }
+            } catch (e: Exception) {
+                emit(Resource.Error(e.localizedMessage))
+            }
+        }
+    }
+
+    override suspend fun searchRecipe(query: String): Flow<Resource<List<Result>>> {
+        return flow {
+            try {
+                emit(Resource.Loading())
+                val response = apiService.searchRecipe(query)
+                if (response.isSuccessful){
+                    val data = response.body()?.let { NetworkMapper.searchResponseToDomain(it) }
+                    emit(Resource.Success(data?.results))
                 }
             } catch (e: Exception) {
                 emit(Resource.Error(e.localizedMessage))

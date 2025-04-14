@@ -57,7 +57,8 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     authViewModel: AuthViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
-    navigateDetail : (Int) -> Unit
+    navigateDetail : (Int) -> Unit,
+    navigateSearch : (String) -> Unit
 ) {
     val account = authViewModel.accountState.collectAsState()
     val recipes by homeViewModel.recipes.collectAsState()
@@ -111,10 +112,10 @@ fun HomeScreen(
            CustomSearchField(
                modifier = modifier.width(250.dp),
                placeholder = "Search recipe",
-               input = query
-           ) {
-               query = it
-           }
+               input = query,
+               onValueChange = {query = it},
+               onSearch = {navigateSearch(query)}
+           )
           Box{
               Column (
                   modifier = modifier

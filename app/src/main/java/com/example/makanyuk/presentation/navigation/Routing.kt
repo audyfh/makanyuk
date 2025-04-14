@@ -51,3 +51,8 @@ object TrackRoute : AppRoute
 
 @Serializable
 object MealPlanRoute : AppRoute
+
+@Serializable
+data class SearchRoute(
+    val query : String
+) : AppRoute
