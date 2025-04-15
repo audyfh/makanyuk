@@ -46,7 +46,8 @@ import com.example.makanyuk.presentation.saved.SavedDetailScreen
 
 @Composable
 fun MainNavigation(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateLogin : () -> Unit
 ) {
     val navController = rememberNavController()
     val backStackState = navController.currentBackStackEntryAsState().value
@@ -140,7 +141,9 @@ fun MainNavigation(
                 MealPlanScreen()
             }
             composable<ProfileRoute>{
-                ProfileScreen()
+                ProfileScreen(
+                    navigateLogin = navigateLogin
+                )
             }
             navigation<AI>(startDestination = AIRoute){
                 composable<AIRoute>{
@@ -183,10 +186,3 @@ private fun navigateToTab(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun test() {
-    StarterProjectTheme {
-        MainNavigation()
-    }
-}

@@ -28,7 +28,14 @@ fun RootNavigation(
             )
         }
         composable<MainRoute>{
-            MainNavigation()
+            MainNavigation(navigateLogin = {
+                navController.navigate(LoginRoute){
+                    popUpTo(0){
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+            })
         }
     }
 }

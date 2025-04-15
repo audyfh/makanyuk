@@ -16,4 +16,5 @@ interface AuthRepo {
     suspend fun forgotPassword (email: String) : Resource<Unit>
     suspend fun createAccount(id:String, name:String, email: String) : Resource<Unit>
     suspend fun getCurrentUser() : Flow<Resource<FirebaseUser>>
+    suspend fun logout() : Resource<Unit>
 }

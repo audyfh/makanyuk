@@ -92,5 +92,13 @@ class AuthRepoImpl @Inject constructor(
       }
     }
 
+    override suspend fun logout(): Resource<Unit> {
+        return try {
+            Resource.Success(auth.signOut())
+        } catch (e: Exception){
+            Resource.Error(e.localizedMessage)
+        }
+    }
+
 
 }

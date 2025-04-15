@@ -95,4 +95,10 @@ class AuthViewModel @Inject constructor(
             _accountState.value = data
         }
     }
+
+    fun logout(){
+        viewModelScope.launch {
+            authRepo.logout()
+        }
+    }
 }
