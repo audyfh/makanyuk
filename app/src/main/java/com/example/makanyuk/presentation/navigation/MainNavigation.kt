@@ -138,7 +138,9 @@ fun MainNavigation(
                 )
             }
             composable<MealPlanRoute>{
-                MealPlanScreen()
+                MealPlanScreen(
+                    navController = navController
+                )
             }
             composable<ProfileRoute>{
                 ProfileScreen(
@@ -178,7 +180,7 @@ private fun navigateToTab(
     route: AppRoute
 ) {
     navController.navigate(route) {
-       popUpTo(0){
+       popUpTo(navController.graph.findStartDestination().id){
            saveState = true
        }
         launchSingleTop = true

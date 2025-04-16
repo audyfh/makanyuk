@@ -34,7 +34,7 @@ fun AiScreen(
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth().padding(top = 12.dp)
         ) {
             Text("Smart AI", style = MaterialTheme.typography.headlineMedium, color = Primary100)
         }

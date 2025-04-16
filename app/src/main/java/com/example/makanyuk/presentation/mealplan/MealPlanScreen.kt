@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.makanyuk.presentation.comps.MealDayCard
 import com.example.makanyuk.ui.theme.Primary100
 import com.example.makanyuk.util.Resource
@@ -25,7 +26,8 @@ import com.example.makanyuk.util.Resource
 @Composable
 fun MealPlanScreen(
     modifier: Modifier = Modifier,
-    viewModel: MealPlanViewModel = hiltViewModel()
+    viewModel: MealPlanViewModel = hiltViewModel(),
+    navController: NavController
 ) {
 
     val dayMeal by viewModel.dayMeal.collectAsState()
@@ -55,7 +57,8 @@ fun MealPlanScreen(
                         MealDayCard(
                             day = dayMeal.data?.get(it)?.day ?: "",
                             listMeal = dayMeal.data?.get(it)?.meal!!,
-                            nutrients = dayMeal.data?.get(it)?.nutrients!!
+                            nutrients = dayMeal.data?.get(it)?.nutrients!!,
+                            navController = navController
                         )
                     }
                 }

@@ -2,6 +2,7 @@ package com.example.makanyuk.presentation.comps
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,8 +26,10 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.makanyuk.domain.mealplan.Meal
+import com.example.makanyuk.presentation.navigation.DetailRoute
 import com.example.makanyuk.ui.theme.Gray4
 import com.example.makanyuk.ui.theme.Primary60
 import com.example.makanyuk.ui.theme.StarterProjectTheme
@@ -34,7 +37,8 @@ import com.example.makanyuk.ui.theme.StarterProjectTheme
 @Composable
 fun MealPlanCard(
     modifier: Modifier = Modifier,
-    meal: Meal
+    meal: Meal,
+    navController: NavController
 ) {
     Row(
         modifier = modifier
@@ -42,7 +46,12 @@ fun MealPlanCard(
             .height(130.dp)
             .padding(12.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(color = Primary60),
+            .background(color = Primary60)
+            .clickable {
+               navController.navigate(DetailRoute(
+                   id = meal.id
+               ))
+            },
         verticalAlignment = Alignment.CenterVertically,
 
         ) {
@@ -67,7 +76,7 @@ fun MealPlanCard(
                 meal.title,
                 style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                 maxLines = 2,
-                color = Color.White
+                color = White
             )
             Row {
                 Text("${meal.readyInMinutes} min •", color = White, style = MaterialTheme.typography.labelMedium)
@@ -78,19 +87,3 @@ fun MealPlanCard(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun test() {
-    StarterProjectTheme {
-        val meal = Meal(
-            id = 644854,
-            image = "Gluten-Free-Quinoa-and-Corn-Flour-Crepes-644854.jpg",
-            imageType = "jpg",
-            title = "Gluten Free Quinoa and Corn Flour Crepes",
-            readyInMinutes = 60,
-            servings = 4,
-            sourceUrl = "http://www.foodista.com/recipe/MGMB6CBY/gluten-free-quinoa-and-corn-flour-crepes"
-        )
-        MealPlanCard(meal = meal)
-    }
-}

@@ -60,7 +60,7 @@ fun RegisterScreen(
     LaunchedEffect(authState) {
         when(authState){
             is Resource.Loading -> {}
-            is Resource.Error -> Toast.makeText(context,"error",Toast.LENGTH_SHORT).show()
+            is Resource.Error -> Toast.makeText(context,authState.msg,Toast.LENGTH_SHORT).show()
             is Resource.Success -> navController.navigate(LoginRoute)
         }
     }
@@ -132,7 +132,7 @@ fun RegisterScreen(
             ){
                 ArrowButton(text = "Sign Up") {
                     viewModel.register(
-                        name,email,password,confirmPassword
+                        name.trim(),email.trim(),password.trim(),confirmPassword.trim()
                     )
                 }
                 Spacer(modifier.height(20.dp))

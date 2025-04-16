@@ -63,7 +63,7 @@ class AuthViewModel @Inject constructor(
             }
 
             if (password != confirmPassword) {
-                _authState.value = Resource.Error("Ada data yang kosong")
+                _authState.value = Resource.Error("Password berbeda")
                 return@launch
             }
             authRepo.registerEmail(
