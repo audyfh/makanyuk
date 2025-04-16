@@ -29,8 +29,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.example.makanyuk.presentation.comps.RecipeShimmer
 import com.example.makanyuk.ui.theme.Primary100
 import com.example.makanyuk.util.Resource
+import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun SearchScreen(
@@ -62,7 +64,16 @@ fun SearchScreen(
         }
         when (state) {
             is Resource.Loading -> {
-                CircularProgressIndicator()
+                LazyVerticalGrid(
+                    modifier = modifier.padding(12.dp).shimmer(),
+                    columns = GridCells.Fixed(2),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    items(8){
+                        RecipeShimmer()
+                    }
+                }
             }
 
             is Resource.Error -> {

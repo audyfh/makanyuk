@@ -105,7 +105,7 @@ fun LoginScreen(
             ){
                 ArrowButton(text = "Sign In") {
                     viewModel.login(
-                        email, password
+                        email.trim(), password.trim()
                     )
                 }
                 Spacer(modifier.height(20.dp))
