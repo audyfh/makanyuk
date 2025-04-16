@@ -46,9 +46,11 @@ import com.example.makanyuk.presentation.auth.AuthViewModel
 import com.example.makanyuk.presentation.comps.CategoryButton
 import com.example.makanyuk.presentation.comps.CustomSearchField
 import com.example.makanyuk.presentation.comps.RecipeCard
+import com.example.makanyuk.presentation.comps.RecipeShimmer
 import com.example.makanyuk.ui.theme.Primary100
 import com.example.makanyuk.ui.theme.StarterProjectTheme
 import com.example.makanyuk.util.Resource
+import com.valentinilk.shimmer.shimmer
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -149,36 +151,42 @@ fun HomeScreen(
                 )
             }
         }
-        LazyVerticalGrid(
-            modifier = modifier.padding(12.dp),
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            when(recipes){
-                is Resource.Loading -> {
-                    items(1){
-                        CircularProgressIndicator()
+        when(recipes){
+            is Resource.Loading -> {
+                LazyVerticalGrid(
+                    modifier = modifier.padding(12.dp).shimmer(),
+                    columns = GridCells.Fixed(2),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    items(8){
+                       RecipeShimmer()
                     }
                 }
-                is Resource.Success -> {
+            }
+            is Resource.Error -> {
+                Toast.makeText(
+                    context,
+                    recipes.msg,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            is Resource.Success -> {
+                LazyVerticalGrid(
+                    modifier = modifier.padding(12.dp),
+                    columns = GridCells.Fixed(2),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
                     items(recipes.data?.size ?: 0){ recipe ->
                         RecipeCard(
                             recipe = recipes.data?.get(recipe)!!,
                             onClick = {
                                 val id = recipes.data!![recipe].id
-                                Log.d("DetailScreen", "Navigasi ke detail dengan ID: $id")
                                 navigateDetail(id)
                             }
                         )
                     }
-                }
-                is Resource.Error -> {
-                    Toast.makeText(
-                        context,
-                        recipes.msg,
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             }
         }

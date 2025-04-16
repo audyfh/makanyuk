@@ -107,4 +107,7 @@ dependencies {
 
     //gemini
     implementation(libs.generativeai)
+
+    //shimmer
+    implementation(libs.compose.shimmer)
 }

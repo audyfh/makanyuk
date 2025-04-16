@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.makanyuk.presentation.comps.MealCardShimmer
 import com.example.makanyuk.presentation.comps.MealDayCard
 import com.example.makanyuk.ui.theme.Primary100
 import com.example.makanyuk.util.Resource
@@ -44,7 +45,7 @@ fun MealPlanScreen(
 
         when(dayMeal){
             is Resource.Loading -> {
-                CircularProgressIndicator()
+                MealCardShimmer()
             }
             is Resource.Error -> {
                 Text("Gagal memuat data")
