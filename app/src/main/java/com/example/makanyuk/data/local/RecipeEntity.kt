@@ -2,8 +2,8 @@ package com.example.makanyuk.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.makanyuk.domain.recipe.AnalyzedInstruction
-import com.example.makanyuk.domain.recipe.ExtendedIngredient
+import com.example.makanyuk.domain.recipe.model.AnalyzedInstruction
+import com.example.makanyuk.domain.recipe.model.ExtendedIngredient
 
 @Entity(tableName = "recipes")
 data class RecipeEntity(

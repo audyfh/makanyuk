@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.makanyuk.domain.auth.Account
 import com.example.makanyuk.domain.auth.repo.AccountRepo
 import com.example.makanyuk.domain.auth.repo.AuthRepo
+import com.example.makanyuk.domain.auth.usecase.AuthUseCase
 import com.example.makanyuk.presentation.navigation.AppRoute
 import com.example.makanyuk.presentation.navigation.LoginRoute
 import com.example.makanyuk.presentation.navigation.MainRoute
@@ -20,12 +21,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val authRepo: AuthRepo,
-    private val accountRepo: AccountRepo
+    private val authUseCase: AuthUseCase
 ) : ViewModel() {
 
     private var _authState = MutableStateFlow<Resource<AuthResult>>(Resource.Loading())
     val authState: StateFlow<Resource<AuthResult>> = _authState.asStateFlow()
+
+    private var _registerState = MutableStateFlow<Resource<AuthResult>>(Resource.Loading())
+    val registerState : StateFlow<Resource<AuthResult>> = _registerState.asStateFlow()
 
     private var _loginState = MutableStateFlow<Resource<FirebaseUser>>(Resource.Loading())
     val loginState: StateFlow<Resource<FirebaseUser>> = _loginState.asStateFlow()
@@ -42,9 +45,8 @@ class AuthViewModel @Inject constructor(
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
-            authRepo.loginEmail(email, password).collect {
+            authUseCase.login(email, password).collect {
                 _authState.value = it
-
             }
             getUserData()
         }
@@ -57,29 +59,15 @@ class AuthViewModel @Inject constructor(
         confirmPassword: String
     ) {
         viewModelScope.launch {
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                _authState.value = Resource.Error("Ada data yang kosong")
-                return@launch
-            }
-
-            if (password != confirmPassword) {
-                _authState.value = Resource.Error("Password berbeda")
-                return@launch
-            }
-            authRepo.registerEmail(
-                name = name,
-                email = email,
-                password = password,
-                confirmPassword = confirmPassword
-            ).collect {
-                _authState.value = it
-            }
+           authUseCase.register(name, email, password, confirmPassword).collect{
+               _registerState.value = it
+           }
         }
     }
 
     private fun getCurrentUser() {
         viewModelScope.launch {
-            authRepo.getCurrentUser().collect { result ->
+            authUseCase.getCurrentUser().collect { result ->
                 _loginState.value = result
                 if (result is Resource.Success){
                     startDestination = MainRoute
@@ -91,14 +79,14 @@ class AuthViewModel @Inject constructor(
 
     private fun getUserData() {
         viewModelScope.launch {
-           val data  = accountRepo.getUserProfile()
+           val data  = authUseCase.getUserProfile()
             _accountState.value = data
         }
     }
 
     fun logout(){
         viewModelScope.launch {
-            authRepo.logout()
+            authUseCase.logout()
         }
     }
 }

@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.makanyuk.R
-import com.example.makanyuk.domain.recipe.Recipe
+import com.example.makanyuk.domain.recipe.model.Recipe
 import com.example.makanyuk.ui.theme.Gray3
 import com.example.makanyuk.ui.theme.Primary100
 

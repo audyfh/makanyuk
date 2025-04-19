@@ -2,8 +2,8 @@ package com.example.makanyuk.presentation.saved
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.makanyuk.domain.recipe.Recipe
-import com.example.makanyuk.domain.repository.RoomRepository
+import com.example.makanyuk.domain.recipe.model.Recipe
+import com.example.makanyuk.domain.recipe.usecase.local.LocalRecipeUseCases
 import com.example.makanyuk.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SavedViewModel @Inject constructor(
-    private val roomRepository: RoomRepository
+    private val localRecipeUseCases: LocalRecipeUseCases
 ) : ViewModel() {
 
     private var _recipes = MutableStateFlow<Resource<List<Recipe>>>(Resource.Loading())
@@ -30,7 +30,7 @@ class SavedViewModel @Inject constructor(
 
     private fun getAllRecipes(){
         viewModelScope.launch {
-            roomRepository.getAllRecipe().collectLatest {
+            localRecipeUseCases.getLocalRecipes().collectLatest {
                 _recipes.value = it
             }
         }
@@ -38,18 +38,18 @@ class SavedViewModel @Inject constructor(
 
     fun toggleSave(recipe: Recipe){
         viewModelScope.launch {
-            val saved = roomRepository.isSaved(recipe.id)
+            val saved = localRecipeUseCases.isLocalRecipeSaved(recipe.id)
             if (saved){
-                roomRepository.deleteRecipe(recipe)
+                localRecipeUseCases.deleteLocalRecipe(recipe)
             } else {
-                roomRepository.insertRecipe(recipe)
+                localRecipeUseCases.insertLocalRecipe(recipe)
             }
         }
     }
 
     fun getRecipeDetail(id: Int){
         viewModelScope.launch {
-            val data = roomRepository.getRecipeById(id)
+            val data = localRecipeUseCases.getLocalRecipeByID(id)
             _singleRecipe.value = data
         }
     }

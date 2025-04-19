@@ -1,6 +1,6 @@
 package com.example.makanyuk.data.network.retrofit.model
 
-import com.example.makanyuk.domain.recipe.Result
+import com.example.makanyuk.domain.recipe.model.Result
 
 data class SearchResponse(
     val number: Int,

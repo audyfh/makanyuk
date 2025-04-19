@@ -56,7 +56,7 @@ fun RegisterScreen(
     var confirmPassword by remember { mutableStateOf("") }
     var isChecked by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val authState by viewModel.authState.collectAsState()
+    val authState by viewModel.registerState.collectAsState()
     LaunchedEffect(authState) {
         when(authState){
             is Resource.Loading -> {}

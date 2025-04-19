@@ -4,9 +4,9 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import com.example.makanyuk.domain.mealplan.DayMeal
-import com.example.makanyuk.domain.mealplan.Meal
-import com.example.makanyuk.domain.mealplan.Week
+import com.example.makanyuk.domain.recipe.model.mealplan.DayMeal
+import com.example.makanyuk.domain.recipe.model.mealplan.Meal
+import com.example.makanyuk.domain.recipe.model.mealplan.Week
 import java.io.IOException
 
 object Utility {

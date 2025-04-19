@@ -1,8 +1,8 @@
 package com.example.makanyuk.data.local
 
 import androidx.room.TypeConverter
-import com.example.makanyuk.domain.recipe.AnalyzedInstruction
-import com.example.makanyuk.domain.recipe.ExtendedIngredient
+import com.example.makanyuk.domain.recipe.model.AnalyzedInstruction
+import com.example.makanyuk.domain.recipe.model.ExtendedIngredient
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

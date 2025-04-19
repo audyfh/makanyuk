@@ -3,10 +3,9 @@ package com.example.makanyuk.data.network.retrofit.repository
 import android.util.Log
 import com.example.makanyuk.data.mapper.NetworkMapper
 import com.example.makanyuk.data.network.retrofit.ApiService
-import com.example.makanyuk.domain.mealplan.DayMeal
-import com.example.makanyuk.domain.recipe.Recipe
-import com.example.makanyuk.domain.mealplan.MealPlan
-import com.example.makanyuk.domain.recipe.Result
+import com.example.makanyuk.domain.recipe.model.mealplan.DayMeal
+import com.example.makanyuk.domain.recipe.model.Recipe
+import com.example.makanyuk.domain.recipe.model.Result
 import com.example.makanyuk.domain.recipe.repo.RecipeRepo
 import com.example.makanyuk.util.Resource
 import com.example.makanyuk.util.Utility
