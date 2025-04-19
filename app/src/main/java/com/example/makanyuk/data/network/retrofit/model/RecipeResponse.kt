@@ -1,7 +1,7 @@
 package com.example.makanyuk.data.network.retrofit.model
 
-import com.example.makanyuk.domain.recipe.AnalyzedInstruction
-import com.example.makanyuk.domain.recipe.ExtendedIngredient
+import com.example.makanyuk.domain.recipe.model.AnalyzedInstruction
+import com.example.makanyuk.domain.recipe.model.ExtendedIngredient
 
 data class RecipeResponse(
     val aggregateLikes: Int?,

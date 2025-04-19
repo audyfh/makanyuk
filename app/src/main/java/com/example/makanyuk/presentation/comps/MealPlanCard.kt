@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.makanyuk.domain.mealplan.Meal
+import com.example.makanyuk.domain.recipe.model.mealplan.Meal
 import com.example.makanyuk.presentation.navigation.DetailRoute
 import com.example.makanyuk.ui.theme.Gray4
 import com.example.makanyuk.ui.theme.Primary60

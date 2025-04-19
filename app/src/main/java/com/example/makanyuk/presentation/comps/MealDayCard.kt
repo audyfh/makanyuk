@@ -21,8 +21,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.makanyuk.domain.mealplan.Meal
-import com.example.makanyuk.domain.mealplan.Nutrients
+import com.example.makanyuk.domain.recipe.model.mealplan.Meal
+import com.example.makanyuk.domain.recipe.model.mealplan.Nutrients
 import com.example.makanyuk.ui.theme.Primary80
 import com.example.makanyuk.ui.theme.Secondary100
 import com.example.makanyuk.ui.theme.Secondary60

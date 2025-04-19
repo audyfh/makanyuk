@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
-import com.example.makanyuk.presentation.add.AddScreen
 import com.example.makanyuk.presentation.ai.AiScreen
 import com.example.makanyuk.presentation.ai.TrackScreen
 import com.example.makanyuk.presentation.home.DetailScreen

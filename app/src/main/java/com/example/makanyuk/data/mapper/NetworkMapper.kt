@@ -3,9 +3,9 @@ package com.example.makanyuk.data.mapper
 import com.example.makanyuk.data.network.retrofit.model.MealPlanResponse
 import com.example.makanyuk.data.network.retrofit.model.RecipeResponse
 import com.example.makanyuk.data.network.retrofit.model.SearchResponse
-import com.example.makanyuk.domain.recipe.Recipe
-import com.example.makanyuk.domain.mealplan.MealPlan
-import com.example.makanyuk.domain.recipe.SearchRecipe
+import com.example.makanyuk.domain.recipe.model.Recipe
+import com.example.makanyuk.domain.recipe.model.mealplan.MealPlan
+import com.example.makanyuk.domain.recipe.model.SearchRecipe
 
 object NetworkMapper {
     
@@ -105,7 +105,7 @@ object NetworkMapper {
         )
     }
 
-    fun searchResponseToDomain(searchResponse: SearchResponse) : SearchRecipe{
+    fun searchResponseToDomain(searchResponse: SearchResponse) : SearchRecipe {
         return SearchRecipe(
             number = searchResponse.number,
             totalResults = searchResponse.totalResults,

@@ -1,7 +1,7 @@
 package com.example.makanyuk.data.mapper
 
 import com.example.makanyuk.data.local.RecipeEntity
-import com.example.makanyuk.domain.recipe.Recipe
+import com.example.makanyuk.domain.recipe.model.Recipe
 
 object RecipeMapper {
     fun entityToDomain(recipeEntity: RecipeEntity) : Recipe {
