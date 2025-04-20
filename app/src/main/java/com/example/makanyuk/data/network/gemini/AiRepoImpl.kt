@@ -2,6 +2,7 @@ package com.example.makanyuk.data.network.gemini
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import com.example.makanyuk.domain.ai.model.FoodAnalysis
 import com.example.makanyuk.domain.ai.repo.AIRepository
 import com.example.makanyuk.util.Resource
@@ -19,8 +20,7 @@ class AiRepoImpl @Inject constructor(
 
     override suspend fun sendImage(context: Context, imgUri: Uri): Flow<Resource<FoodAnalysis>> {
         val prompt = """
-Analyze the food in the image and return only the JSON below (no extra text, no ```json):
-
+Analyze this image and return a JSON response with the following format :
 {
   "foodName": string,
   "calorie": number,
@@ -32,6 +32,8 @@ Analyze the food in the image and return only the JSON below (no extra text, no 
   },
   "ingredients": [string]
 }
+ Return the JSON string without any comment. Always make a guess for the food name 
+ and its nutritional values if the image looks like food, even if you are unsure. 
 """.trimIndent()
         return flow {
             emit(Resource.Loading())
@@ -45,7 +47,8 @@ Analyze the food in the image and return only the JSON below (no extra text, no 
                     }
                 )
                 response.text?.let {
-                    val json = Utility.extractJsonSimple(response.text!!)
+                    Log.d("gemini",it)
+                    val json = Utility.extractJsonSimple(it)
                     if (json.isNotEmpty()){
                         val res = Json.decodeFromString<FoodAnalysis>(json)
                         emit(Resource.Success(res))

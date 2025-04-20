@@ -69,8 +69,9 @@ fun TrackScreen(
     val cameraLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicture()
     ) { success ->
-        if (success) {
-            cameraImageUri.value = cameraImageUri.value
+        if (success && cameraImageUri.value != null) {
+            imageuri.value = cameraImageUri.value
+            viewModel.sendImage(context,imageuri.value!!)
         }
 
     }
